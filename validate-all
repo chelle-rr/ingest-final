@@ -27,6 +27,7 @@
 ## this one here is messy but functional!
 ##
 ## - written by ft, March-April 2019
+## - updated by mr, 2024
 ##
 _now=$(date +"%Y_%m_%d")
 _file="$_now-FailedBags.txt"
