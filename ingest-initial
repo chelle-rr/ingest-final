@@ -27,30 +27,52 @@
 ## - written by ft, March-April 2019
 ## - updated by mr, 2024
 ##
-find . -type f -iname ".DS_Store" -exec rm -rf {} \;
-find . -type f -iname "thumbs.db" -exec rm -rf {} \;
-find . -type f -iname "\~\$*" -exec rm -rf {} \;
-find . -name "*:*" -exec rename 's/:/-/g' {} +
-find . -name "*🎆*" -exec rename 's/🎆/-/g' {} +
-find . -name "*👍*" -exec rename 's/👍/-/g' {} +
-find . -name "*🙏*" -exec rename 's/🙏/-/g' {} +
-find . -name "*👌*" -exec rename 's/👌/-/g' {} +
-find . -name "*🛄*" -exec rename 's/🛄/-/g' {} +
-find . -name "*\|*" -exec rename 's/\|/-/g' {} +
-find . -name "*\"*" -exec rename 's/\"/-/g' {} +
-find . -name "*\**" -exec rename 's/\*/-/g' {} +
-find . -name "*\?*" -exec rename 's/\?/-/g' {} +
-find . -name "*\#*" -exec rename 's/\#/-/g' {} +
-find . -name '*\\*' -exec rename 's/\\/-/g' {} +
-find . -name "*~*" -exec rename 's/~/-/g' {} +
-find . -name "*\`*" -exec rename 's/\`/-/g' {} +
-find . -name "*@*" -exec rename 's/@/-/g' {} +
-find . -name "*\$*" -exec rename 's/\$/-/g' {} +
-find . -name "*%*" -exec rename 's/%/-/g' {} +
-find . -name "*\^*" -exec rename 's/\^/-/g' {} +
-find . -name "*&*" -exec rename 's/&/-/g' {} +
-find . -name "*\>*" -exec rename 's/\>/-/g' {} +
-find . -name "*\<*" -exec rename 's/\</-/g' {} +
+
+tag -r Red,Orange,Yellow,Green,Blue,Purple,Gray "$dir"
+find "$dir" -type f \( -iname ".DS_Store" -o -iname "thumbs.db" -o -iname "\~\$*" \) -exec rm -rf {} \;
+find "$dir" -name "*:*" -exec rename 's/:/-/g' {} +
+find "$dir" -name "*🎆*" -exec rename 's/🎆/-/g' {} +
+find "$dir" -name "*👍*" -exec rename 's/👍/-/g' {} +
+find "$dir" -name "*🙏*" -exec rename 's/🙏/-/g' {} +
+find "$dir" -name "*👌*" -exec rename 's/👌/-/g' {} +
+find "$dir" -name "*🛄*" -exec rename 's/🛄/-/g' {} +
+find "$dir" -name "*\|*" -exec rename 's/\|/-/g' {} +
+find "$dir" -name "*\"*" -exec rename 's/\"/-/g' {} +
+find "$dir" -name "*\**" -exec rename 's/\*/-/g' {} +
+find "$dir" -name "*\?*" -exec rename 's/\?/-/g' {} +
+find "$dir" -name "*\#*" -exec rename 's/\#/-/g' {} +
+find "$dir" -name '*\\*' -exec rename 's/\\/-/g' {} +
+find "$dir" -name "*~*" -exec rename 's/~/-/g' {} +
+find "$dir" -name "*\`*" -exec rename 's/\`/-/g' {} +
+find "$dir" -name "*@*" -exec rename 's/@/-/g' {} +
+find "$dir" -name "*\$*" -exec rename 's/\$/-/g' {} +
+find "$dir" -name "*%*" -exec rename 's/%/-/g' {} +
+find "$dir" -name "*\^*" -exec rename 's/\^/-/g' {} +
+find "$dir" -name "*&*" -exec rename 's/&/-/g' {} +
+find "$dir" -name "*\>*" -exec rename 's/\>/-/g' {} +
+find "$dir" -name "*\<*" -exec rename 's/\</-/g' {} +
+find "$dir" -name "*:*" -exec rename 's/:/-/g' {} +
+find "$dir" -name "*🎆*" -exec rename 's/🎆/-/g' {} +
+find "$dir" -name "*👍*" -exec rename 's/👍/-/g' {} +
+find "$dir" -name "*🙏*" -exec rename 's/🙏/-/g' {} +
+find "$dir" -name "*👌*" -exec rename 's/👌/-/g' {} +
+find "$dir" -name "*🛄*" -exec rename 's/🛄/-/g' {} +
+find "$dir" -name "*\|*" -exec rename 's/\|/-/g' {} +
+find "$dir" -name "*\"*" -exec rename 's/\"/-/g' {} +
+find "$dir" -name "*\**" -exec rename 's/\*/-/g' {} +
+find "$dir" -name "*\?*" -exec rename 's/\?/-/g' {} +
+find "$dir" -name "*\#*" -exec rename 's/\#/-/g' {} +
+find "$dir" -name '*\\*' -exec rename 's/\\/-/g' {} +
+find "$dir" -name "*~*" -exec rename 's/~/-/g' {} +
+find "$dir" -name "*\`*" -exec rename 's/\`/-/g' {} +
+find "$dir" -name "*@*" -exec rename 's/@/-/g' {} +
+find "$dir" -name "*\$*" -exec rename 's/\$/-/g' {} +
+find "$dir" -name "*%*" -exec rename 's/%/-/g' {} +
+find "$dir" -name "*\^*" -exec rename 's/\^/-/g' {} +
+find "$dir" -name "*&*" -exec rename 's/&/-/g' {} +
+find "$dir" -name "*\>*" -exec rename 's/\>/-/g' {} +
+find "$dir" -name "*\<*" -exec rename 's/\</-/g' {} +
+
 freshclam
-clamscan -ir .
-echo "Initial ingest script complete! :)"
+clamscan -ir "$dir"
+echo "Final ingest and bagging script complete! :)"
