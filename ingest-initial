@@ -1,0 +1,62 @@
+#!/bin/bash
+##
+## ARCHIVAL DATA INGEST SCRIPT - INITIAL DATA INGEST
+##
+## This script should be used when you receive data
+## (a hard drive, a download, etc)
+## that needs to be moved into the Archive NAS
+## you expect to receive more data related to this specific event/exhibition/project
+##
+## If additional forbidden characters/emojis are found to be used,
+## adding extra lines to this script is super simple--
+## just use the same format as below substituting in that specific character.
+##
+## Before executing this script,
+## cd into the location on the hard drive or folder where the new data is.
+##
+## After executing this script, use
+## rsync -a --progress
+## to move this data into
+## the appropriate location on the Archive NAS.
+##
+## The script performs the following actions:
+##### 1. Removes certain temporary/invisible files with no archival significance
+##### 2. Changes forbidden characters to dashes (-)
+##### 3. Runs a quick (not exhaustive) virus scan
+##
+## See additional written documentation in
+## WORK IMAGES/_ARCHIVES/_Instructions/_2019-Manua
+## for more detailed instructions!
+##
+## Friendly reminder that I am not a scripting expert;
+## this one here is messy but functional!
+##
+## - written by ft, March-April 2019
+##
+find . -type f -iname ".DS_Store" -exec rm -rf {} \;
+find . -type f -iname "thumbs.db" -exec rm -rf {} \;
+find . -type f -iname "\~\$*" -exec rm -rf {} \;
+find . -name "*:*" -exec rename 's/:/-/g' {} +
+find . -name "*🎆*" -exec rename 's/🎆/-/g' {} +
+find . -name "*👍*" -exec rename 's/👍/-/g' {} +
+find . -name "*🙏*" -exec rename 's/🙏/-/g' {} +
+find . -name "*👌*" -exec rename 's/👌/-/g' {} +
+find . -name "*🛄*" -exec rename 's/🛄/-/g' {} +
+find . -name "*\|*" -exec rename 's/\|/-/g' {} +
+find . -name "*\"*" -exec rename 's/\"/-/g' {} +
+find . -name "*\**" -exec rename 's/\*/-/g' {} +
+find . -name "*\?*" -exec rename 's/\?/-/g' {} +
+find . -name "*\#*" -exec rename 's/\#/-/g' {} +
+find . -name '*\\*' -exec rename 's/\\/-/g' {} +
+find . -name "*~*" -exec rename 's/~/-/g' {} +
+find . -name "*\`*" -exec rename 's/\`/-/g' {} +
+find . -name "*@*" -exec rename 's/@/-/g' {} +
+find . -name "*\$*" -exec rename 's/\$/-/g' {} +
+find . -name "*%*" -exec rename 's/%/-/g' {} +
+find . -name "*\^*" -exec rename 's/\^/-/g' {} +
+find . -name "*&*" -exec rename 's/&/-/g' {} +
+find . -name "*\>*" -exec rename 's/\>/-/g' {} +
+find . -name "*\<*" -exec rename 's/\</-/g' {} +
+freshclam
+clamscan -ir .
+echo "Initial ingest script complete! :)"

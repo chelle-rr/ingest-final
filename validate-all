@@ -1,0 +1,62 @@
+#!/bin/bash
+##
+## BAG VALIDATION FOR ARCHIVE NAS
+##
+## This script validates bagged packages on the CS-Archive NAS,
+## and should be run manually on a regular basis
+## -or-
+## scheduled to run automatically on a regular basis via cron or similar.
+##
+## This script performs the following actions:
+##### 1. Changes working directory to the top level folder of the CS-Archive NAS.
+##### 2. Identifies all folders that are tagged green (per previously established
+##### Cai Studio Archive policy, a green tag indicates that a bag is complete and
+##### and presumed to be accurate).
+##### 3. Performs the validation process using BagIt on only green-tagged folders.
+##### This validation process includes checking the number of files, the size of
+##### the directory on a bit-level, and the checksums of each file in that payload.
+##### 4. Creates a text file in Cai Studio/Bag-Validations/ with the day's date
+##### indicating which, if any, folders failed the validation process. Folders that
+##### pass the validation process are not listed anywhere, only the failures.
+##
+## See additional written documentation in
+## WORK IMAGES/_ARCHIVES/_Instructions/_2019-Manual
+## for more detailed instructions!
+##
+## Friendly reminder that I am not a scripting expert;
+## this one here is messy but functional!
+##
+## - written by ft, March-April 2019
+##
+_now=$(date +"%Y_%m_%d")
+_file="$_now-FailedBags.txt"
+exec > >(tee /Volumes/Cai\ Studio/Bag-Validations/"$_file") 2>&1
+cd /Volumes/Cai\ Studio
+for dir in **/; do
+if [[ $(tag -l "$dir") = *Green* ]]; then
+  (bagit.py --validate --quiet "$dir")
+fi
+done
+for subdir in **/**/; do
+if [[ $(tag -l "$subdir") = *Green* ]]; then
+  (bagit.py --validate --quiet "$subdir")
+fi
+done
+for subdir3 in **/**/**/; do
+if [[ $(tag -l "$subdir3") = *Green* ]]; then
+  (bagit.py --validate --quiet "$subdir3")
+fi
+done
+for subdir4 in **/**/**/**/; do
+if [[ $(tag -l "$subdir4") = *Green* ]]; then
+  (bagit.py --validate --quiet "$subdir4")
+fi
+done
+for subdir5 in **/**/**/**/**/; do
+if [[ $(tag -l "$subdir5") = *Green* ]]; then
+  (bagit.py --validate --quiet "$subdir5")
+fi
+done
+echo "----------Validation complete!"
+echo "----------Find full list of invalid bags on CS-Archive NAS:"
+echo "----------Cai Studio/Bag-Validations/$_file/"
