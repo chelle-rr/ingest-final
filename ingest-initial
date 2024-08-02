@@ -15,7 +15,7 @@
 ## cd into the location on the hard drive or folder where the new data is.
 ##
 ## After executing this script, use
-## rsync -a --progress
+## rsync -aiv
 ## to move this data into
 ## the appropriate location on the Archive NAS.
 ##
@@ -24,14 +24,8 @@
 ##### 2. Changes forbidden characters to dashes (-)
 ##### 3. Runs a quick (not exhaustive) virus scan
 ##
-## See additional written documentation in
-## WORK IMAGES/_ARCHIVES/_Instructions/_2019-Manua
-## for more detailed instructions!
-##
-## Friendly reminder that I am not a scripting expert;
-## this one here is messy but functional!
-##
 ## - written by ft, March-April 2019
+## - updated by mr, 2024
 ##
 find . -type f -iname ".DS_Store" -exec rm -rf {} \;
 find . -type f -iname "thumbs.db" -exec rm -rf {} \;
